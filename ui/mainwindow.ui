@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1440</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ZoneTag</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="centralLayout">
+    <property name="spacing">
+     <number>4</number>
+    </property>
+    <property name="leftMargin">
+     <number>4</number>
+    </property>
+    <property name="topMargin">
+     <number>4</number>
+    </property>
+    <property name="rightMargin">
+     <number>4</number>
+    </property>
+    <property name="bottomMargin">
+     <number>4</number>
+    </property>
+    <item>
+     <widget class="QGraphicsView" name="pageView"/>
+    </item>
+    <item>
+     <widget class="QListWidget" name="filmstrip">
+      <property name="flow">
+       <enum>QListView::LeftToRight</enum>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::IconMode</enum>
+      </property>
+      <property name="resizeMode">
+       <enum>QListView::Adjust</enum>
+      </property>
+      <property name="movement">
+       <enum>QListView::Static</enum>
+      </property>
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="uniformItemSizes">
+       <bool>true</bool>
+      </property>
+      <property name="minimumHeight">
+       <number>96</number>
+      </property>
+      <property name="maximumHeight">
+       <number>120</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>68</width>
+        <height>86</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1440</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionOpenTemplate"/>
+    <addaction name="actionSaveTemplate"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuTemplate">
+    <property name="title">
+     <string>Template</string>
+    </property>
+    <addaction name="actionTest"/>
+    <addaction name="actionFit"/>
+   </widget>
+   <widget class="QMenu" name="menuBatch">
+    <property name="title">
+     <string>Batch</string>
+    </property>
+    <addaction name="actionChooseFolder"/>
+    <addaction name="actionApply"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTemplate"/>
+   <addaction name="menuBatch"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>Tools</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionOpenTemplate"/>
+   <addaction name="actionSaveTemplate"/>
+   <addaction name="separator"/>
+   <addaction name="actionTest"/>
+   <addaction name="actionFit"/>
+   <addaction name="separator"/>
+   <addaction name="actionChooseFolder"/>
+   <addaction name="actionApply"/>
+  </widget>
+  <widget class="QDockWidget" name="dockFiles">
+   <property name="windowTitle">
+    <string>Files</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>1</number>
+   </attribute>
+   <widget class="QWidget" name="dockFilesContents">
+    <layout class="QVBoxLayout" name="filesLayout">
+     <item>
+      <widget class="QLabel" name="templateLabel">
+       <property name="text">
+        <string>Template: Untitled</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pageTypesCaption">
+       <property name="text">
+        <string>Page types</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListWidget" name="pageTypeList"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="pageTypeButtons">
+       <item>
+        <widget class="QPushButton" name="addPageTypeButton">
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="removePageTypeButton">
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="batchCaption">
+       <property name="text">
+        <string>Batch</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="batchTable">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="recurseBox">
+       <property name="text">
+        <string>Include subfolders</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="chooseFolderButton">
+       <property name="text">
+        <string>Choose folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="outputFolderButton">
+       <property name="text">
+        <string>Output folder</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="outputFolderLabel">
+       <property name="text">
+        <string>Output: not set</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockInspector">
+   <property name="windowTitle">
+    <string>Inspector</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockInspectorContents">
+    <layout class="QFormLayout" name="inspectorLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="pageTypeCaption">
+       <property name="text">
+        <string>Page type</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="pageTypeCombo"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="matchCaption">
+       <property name="text">
+        <string>Match</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="matchCombo">
+       <item>
+        <property name="text">
+         <string>All identifiers</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Any identifier</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="padCaption">
+       <property name="text">
+        <string>Value pad</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="padSpin">
+       <property name="suffix">
+        <string> %</string>
+       </property>
+       <property name="decimals">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <double>10.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="roleCaption">
+       <property name="text">
+        <string>Box role</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="roleCombo">
+       <item>
+        <property name="text">
+         <string>Value</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Identifier</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="tagCaption">
+       <property name="text">
+        <string>Tag</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="tagEdit">
+       <property name="placeholderText">
+        <string>ContractNumber</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="scopeCaption">
+       <property name="text">
+        <string>Look in</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QComboBox" name="scopeCombo">
+       <item>
+        <property name="text">
+         <string>This box</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Whole page</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="ruleCaption">
+       <property name="text">
+        <string>Rule</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QComboBox" name="opCombo">
+       <item>
+        <property name="text">
+         <string>contains</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>equals</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>regex</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="expectedCaption">
+       <property name="text">
+        <string>Expected</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QPlainTextEdit" name="expectedEdit">
+       <property name="maximumHeight">
+        <number>72</number>
+       </property>
+       <property name="placeholderText">
+        <string>Text or pattern that identifies this page</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="readCaption">
+       <property name="text">
+        <string>Reading</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QPlainTextEdit" name="readEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="maximumHeight">
+        <number>72</number>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <layout class="QHBoxLayout" name="readButtons">
+       <item>
+        <widget class="QPushButton" name="readButton">
+         <property name="text">
+          <string>Read box</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="useReadingButton">
+         <property name="text">
+          <string>Use as expected</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QDockWidget" name="dockResults">
+   <property name="windowTitle">
+    <string>Results</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>8</number>
+   </attribute>
+   <widget class="QWidget" name="dockResultsContents">
+    <layout class="QVBoxLayout" name="resultsLayout">
+     <item>
+      <widget class="QTabWidget" name="resultsTabs">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="logTab">
+        <attribute name="title">
+         <string>Log</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="logLayout">
+         <item>
+          <widget class="QPlainTextEdit" name="logView">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tagsTab">
+        <attribute name="title">
+         <string>Tags</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="tagsLayout">
+         <item>
+          <widget class="QTableWidget" name="tagTable">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="conflictsTab">
+        <attribute name="title">
+         <string>Conflicts</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="conflictsLayout">
+         <item>
+          <layout class="QHBoxLayout" name="conflictButtons">
+           <item>
+            <widget class="QPushButton" name="keepAllButton">
+             <property name="text">
+              <string>Keep all existing</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="overwriteAllButton">
+             <property name="text">
+              <string>Overwrite all</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="conflictSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="conflictTable">
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open PDF...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionOpenTemplate">
+   <property name="text">
+    <string>Open Template...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="actionSaveTemplate">
+   <property name="text">
+    <string>Save Template...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionTest">
+   <property name="text">
+    <string>Test This File</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionFit">
+   <property name="text">
+    <string>Fit Page</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="actionChooseFolder">
+   <property name="text">
+    <string>Choose Folder...</string>
+   </property>
+  </action>
+  <action name="actionApply">
+   <property name="text">
+    <string>Apply Tags</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Return</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
