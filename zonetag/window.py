@@ -5,11 +5,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TypeVar, cast
 
-import pymupdf
-from PySide6.QtCore import QFile, QObject, Qt, QThread, QTimer, Signal
-from PySide6.QtGui import QAction, QColor, QGuiApplication, QIcon, QImage, QPalette, QPixmap
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import (
+import pymupdf  # type: ignore[import-not-found]
+from PySide6.QtCore import QFile, QObject, Qt, QThread, QTimer, Signal  # type: ignore[import-not-found]
+from PySide6.QtGui import QAction, QColor, QGuiApplication, QIcon, QImage, QPalette, QPixmap  # type: ignore[import-not-found]
+from PySide6.QtUiTools import QUiLoader  # type: ignore[import-not-found]
+from PySide6.QtWidgets import (  # type: ignore[import-not-found]
     QAbstractItemView,
     QApplication,
     QCheckBox,
@@ -32,7 +32,7 @@ from PySide6.QtWidgets import (
     QTableWidget,
     QTableWidgetItem,
     QWidget,
-)
+)  
 
 from zonetag.canvas import PageCanvas
 from zonetag.engine import FilePlan, PageReport, analyze, tags_to_write
@@ -49,6 +49,7 @@ def png_image(data: bytes) -> QImage:
 
 
 UI_PATH = Path(__file__).resolve().parent.parent / "ui" / "mainwindow.ui"
+ICON_PATH = Path(__file__).resolve().parent / "Asset-1.svg"
 
 PAGE_COLORS = {
     "matched": "#1f6b45",
@@ -129,6 +130,7 @@ class PreviewWorker(QThread):
 class MainController:
     def __init__(self):
         self.ui = load_main_window()
+        self.ui.setWindowIcon(QIcon(str(ICON_PATH)))
         self.template = Template()
         self.template.add_page_type("Page A")
         self.template_path: Path | None = None

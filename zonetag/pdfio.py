@@ -5,9 +5,9 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-import pikepdf
-import pymupdf
-from pikepdf.models.metadata import PdfMetadata
+import pikepdf  # type: ignore[import-not-found]
+import pymupdf  # type: ignore[import-not-found]
+from pikepdf.models.metadata import PdfMetadata  # type: ignore[import-not-found]
 
 from zonetag.model import PDFX_NAMESPACE, STANDARD_INFO_KEYS, RectN, sanitize_tag
 from zonetag.ocr import pixmap_to_bgr, recognize

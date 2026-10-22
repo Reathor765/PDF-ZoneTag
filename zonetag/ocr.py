@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import numpy as np
+import numpy as np   # type: ignore[import-not-found]
 
 _engine = None
 _error: str | None = None
@@ -19,7 +19,7 @@ def recognize(image) -> str:
         return ""
     try:
         if _engine is None:
-            from rapidocr_onnxruntime import RapidOCR
+            from rapidocr_onnxruntime import RapidOCR  # type: ignore[import-not-found]
 
             _engine = RapidOCR()
         result, _elapsed = _engine(image)

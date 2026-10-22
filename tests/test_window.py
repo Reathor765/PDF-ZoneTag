@@ -1,15 +1,15 @@
 import os
 from pathlib import Path
 
-import pymupdf
-import pytest
+import pymupdf  # type: ignore[import-not-found]
+import pytest  # type: ignore[import-not-found]
 
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
-from PySide6.QtCore import QPoint, Qt
-from PySide6.QtGui import QAction
-from PySide6.QtTest import QTest
-from PySide6.QtWidgets import (
+from PySide6.QtCore import QPoint, Qt  # type: ignore[import-not-found]
+from PySide6.QtGui import QAction  # type: ignore[import-not-found]
+from PySide6.QtTest import QTest  # type: ignore[import-not-found]
+from PySide6.QtWidgets import (  # type: ignore[import-not-found]
     QApplication,
     QComboBox,
     QDockWidget,
@@ -37,6 +37,7 @@ def test_designer_window_loads(qapp):
     assert controller.w(QDockWidget, "dockFiles").windowTitle() == "Files"
     assert controller.w(QDockWidget, "dockResults").windowTitle() == "Results"
     assert controller.template.page_types[0].name == "Page A"
+    assert not controller.ui.windowIcon().isNull()
     controller.shutdown()
     controller.ui.close()
 

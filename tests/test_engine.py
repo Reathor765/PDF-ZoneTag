@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-import pikepdf
-import pymupdf
+import pikepdf  # type: ignore[import-not-found]
+import pymupdf  # type: ignore[import-not-found]
 
 from zonetag.engine import analyze, tags_to_write
 from zonetag.model import Identifier, RectN, Template, Zone, new_id

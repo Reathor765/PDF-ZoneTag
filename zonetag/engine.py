@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-import pymupdf
+import pymupdf  # type: ignore[import-not-found]
 
 from zonetag.model import Identifier, PageType, Template
 from zonetag.pdfio import document_guard, extract_text, normalize_text, ocr_region, read_custom

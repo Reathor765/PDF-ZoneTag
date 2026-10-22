@@ -5,10 +5,10 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import cast
 
-import shiboken6
-from PySide6.QtCore import QObject, QPoint, QRectF, Qt, Signal
-from PySide6.QtGui import QColor, QImage, QKeySequence, QPainter, QPen, QPixmap, QShortcut
-from PySide6.QtWidgets import (
+import shiboken6  # type: ignore[import-not-found]
+from PySide6.QtCore import QObject, QPoint, QRectF, Qt, Signal  # type: ignore[import-not-found]
+from PySide6.QtGui import QColor, QImage, QKeySequence, QPainter, QPen, QPixmap, QShortcut  # type: ignore[import-not-found]
+from PySide6.QtWidgets import (  # type: ignore[import-not-found]
     QGraphicsItem,
     QGraphicsPixmapItem,
     QGraphicsRectItem,
@@ -76,7 +76,7 @@ class ZoneItem(QGraphicsRectItem):
         )
         self.setFlags(flags)
         self._label: QGraphicsSimpleTextItem | None = QGraphicsSimpleTextItem(self)
-        self._label.setBrush(QColor("#f4f7fb"))
+        self._label.setBrush(QColor("#f4f7fb"))  # type: ignore[import-not-found]
         self._handles = {corner: HandleItem(corner, self) for corner in ("nw", "ne", "sw", "se")}
         self.update_look()
         self.sync_handles()
@@ -205,12 +205,12 @@ class PageCanvas(QObject):
         pixmap = QPixmap.fromImage(image)
         if self._pix is None or not shiboken6.isValid(self._pix):
             self._pix = self.scene.addPixmap(pixmap)
-            self._pix.setZValue(0)
+            self._pix.setZValue(0)  # type: ignore[import-not-found]
         else:
             self._pix.setPixmap(pixmap)
         self._origin = None
         self._remove_band()
-        self.scene.setSceneRect(self._pix.boundingRect())
+        self.scene.setSceneRect(self._pix.boundingRect())  # type: ignore[import-not-found]
         self.fit()
 
     def fit(self) -> None:
@@ -313,7 +313,7 @@ class PageCanvas(QObject):
                 QRectF(),
                 QPen(QColor("#8ec5ff"), 1, Qt.PenStyle.DashLine),
             )
-            self._band.setZValue(5)
+            self._band.setZValue(5)  # type: ignore[import-not-found]
             return True
         if event_type == event.Type.MouseMove and self._origin is not None:
             self._update_band(event.position().toPoint())
